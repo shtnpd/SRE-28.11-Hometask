@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: script-sla
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: script-sla
+  template:
+    metadata:
+      labels:
+        app: script-sla
+    spec:
+      containers:
+      - name: script-sla
+        image: script-sla:latest  # Используем собранный образ script-sla
+        ports:
+        - containerPort: 8001  # Порт, на котором будет доступен SLA
+        env:
+        - name: PROMETHEUS_SCRAPE_INTERVAL
+          value: "15s"  # Интервал сканирования Prometheus
