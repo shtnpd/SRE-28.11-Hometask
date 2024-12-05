@@ -1,29 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prometheus
+  name: script-prober
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prometheus
+      app: script-prober
   template:
     metadata:
       labels:
-        app: prometheus
+        app: script-prober
     spec:
       containers:
-      - name: prometheus
-        image: prom/prometheus:latest  # Используем официальный образ Prometheus
+      - name: script-prober
+        image: script-prober:latest
         ports:
-        - containerPort: 9090  # Порт, на котором будет доступен Prometheus
+        - containerPort: 8080
         volumeMounts:
-        - name: config-volume
-          mountPath: /etc/prometheus
-          subPath: prometheus.yml
-          readOnly: true
+        - name: script-prober-volume
+          mountPath: /app/oncall_prober.py
+          subPath: oncall_prober.py
       volumes:
-      - name: config-volume
+      - name: script-prober-volume
         configMap:
-          name: prometheus-sla-config  # Используем обновленный ConfigMap с настройками для пробера и SLA
-
+          name: script-prober-config

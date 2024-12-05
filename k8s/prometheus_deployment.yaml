@@ -14,15 +14,13 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus:latest  # Используем официальный образ Prometheus
+        image: prom/prometheus:latest
         ports:
-        - containerPort: 9090  # Порт, на котором будет доступен Prometheus
+        - containerPort: 9090
         volumeMounts:
         - name: config-volume
           mountPath: /etc/prometheus
-          subPath: prometheus.yml
-          readOnly: true
       volumes:
       - name: config-volume
         configMap:
-          name: prometheus-config  # Используем ранее созданный ConfigMap
+          name: prometheus-config

@@ -7,6 +7,6 @@ spec:
     app: prometheus
   ports:
   - protocol: TCP
-    port: 9090  # Порт, на котором доступен Prometheus
+    port: 9090
     targetPort: 9090
-  type: ClusterIP  # Сервис доступен внутри кластера Minikube
+

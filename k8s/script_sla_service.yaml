@@ -7,6 +7,5 @@ spec:
     app: script-sla
   ports:
   - protocol: TCP
-    port: 8001  # Порт, на котором доступен сервис
-    targetPort: 8001
-  type: ClusterIP  # Сервис доступен внутри кластера Minikube
+    port: 8081
+    targetPort: 8081

@@ -7,6 +7,7 @@ data:
     global:
       scrape_interval: 15s
     scrape_configs:
-      - job_name: 'oncall-prober'
+      - job_name: 'prometheus'
         static_configs:
-          - targets: ['oncall-prober-service:8000']  # Адрес нашего сервиса
+          - targets: ['localhost:9090']
+

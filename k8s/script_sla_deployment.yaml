@@ -14,9 +14,14 @@ spec:
     spec:
       containers:
       - name: script-sla
-        image: script-sla:latest  # Используем собранный образ script-sla
+        image: script-sla:latest
         ports:
-        - containerPort: 8001  # Порт, на котором будет доступен SLA
-        env:
-        - name: PROMETHEUS_SCRAPE_INTERVAL
-          value: "15s"  # Интервал сканирования Prometheus
+        - containerPort: 8081
+        volumeMounts:
+        - name: script-sla-volume
+          mountPath: /app/script_sla.py
+          subPath: script_sla.py
+      volumes:
+      - name: script-sla-volume
+        configMap:
+          name: script-sla-config
